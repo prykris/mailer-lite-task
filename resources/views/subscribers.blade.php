@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="col">
-                            <input type="submit" class="btn btn-success" type="button" id="create-button"
+                            <input type="submit" class="btn btn-success" id="create-button"
                                    value="Create">
                         </div>
                     </div>
