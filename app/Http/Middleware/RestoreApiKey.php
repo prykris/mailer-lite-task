@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Protected routes if api key is not present
+ * Read saved API Key for current visitor otherwise redirect to input page
  */
-class EnsureApiKeyIsSet
+class RestoreApiKey
 {
 
-    public function __construct(private readonly MailerLiteService $mailerLiteService)
+    public function __construct(private readonly ?MailerLiteService $mailerLiteService)
     {
     }
 
@@ -24,8 +24,10 @@ class EnsureApiKeyIsSet
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (false === $this->mailerLiteService->ready()) {
-            redirect(route('api-key'));
+        $currentApiKey = $this->mailerLiteService->readApiKeyForCurrentUser();
+
+        if ($currentApiKey) {
+            $this->mailerLiteService->setApiKey($currentApiKey->api_key);
         }
 
         return $next($request);

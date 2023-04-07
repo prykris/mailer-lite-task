@@ -1,4 +1,4 @@
-p<?php
+<?php
 
 use App\Providers\MailerLiteServiceProvider;
 use Illuminate\Support\Facades\Facade;
@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'MailerLite Developer Task Application'),
 
     /*
     |--------------------------------------------------------------------------

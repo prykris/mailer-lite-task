@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('api_keys', function (Blueprint $table) {
-            $table->uuid('visitor_uuid');
+        Schema::create('api_requests', function (Blueprint $table) {
+            $table->id();
             $table->text('api_key');
             $table->timestamps();
         });
@@ -22,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('api_keys');
+        Schema::dropIfExists('api_requests');
     }
 };

@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Services\MailerLiteService;
-use DateTime;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class SubscriberController extends Controller
 {
 
-    public function __construct(protected ?MailerLiteService $mailerLiteService)
+    public function __construct(protected MailerLiteService $mailerLiteService)
     {
-//        Session::put('test', new DateTime());
     }
 
-    public function index(): JsonResponse
+    public function index(): View
     {
-        dd(Session::all());
+        return view('subscribers');
     }
 
 }
