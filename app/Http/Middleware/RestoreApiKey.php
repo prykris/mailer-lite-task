@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RestoreApiKey
 {
-
     public function __construct(private readonly ?MailerLiteService $mailerLiteService)
     {
     }

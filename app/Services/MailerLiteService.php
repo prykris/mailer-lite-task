@@ -14,8 +14,7 @@ use JsonException;
 
 class MailerLiteService
 {
-
-    const BASE_URI = 'https://connect.mailerlite.com/api/';
+    public const BASE_URI = 'https://connect.mailerlite.com/api/';
 
     private readonly Client $client;
 
@@ -166,16 +165,17 @@ class MailerLiteService
      * @param DateTimeInterface|null $unsubscribedAt Must be a valid date in the format yyyy-MM-dd HH:mm:ss
      * @return array|null
      */
-    public function createSubscriber(string             $email,
-                                     array              $fields = [],
-                                     array              $groups = [],
-                                     string             $status = 'active',
-                                     ?DateTimeInterface $subscribedAt = null,
-                                     string             $ipAddress = null,
-                                     ?DateTimeInterface $opted_in_at = null,
-                                     ?string            $optinIp = null,
-                                     ?DateTimeInterface $unsubscribedAt = null): ?array
-    {
+    public function createSubscriber(
+        string             $email,
+        array              $fields = [],
+        array              $groups = [],
+        string             $status = 'active',
+        ?DateTimeInterface $subscribedAt = null,
+        string             $ipAddress = null,
+        ?DateTimeInterface $opted_in_at = null,
+        ?string            $optinIp = null,
+        ?DateTimeInterface $unsubscribedAt = null
+    ): ?array {
         return $this->request('post', 'subscribers', get_defined_vars());
     }
 
@@ -190,16 +190,17 @@ class MailerLiteService
     /**
      * Similar to create subscriber
      */
-    public function updateSubscriber(string             $id,
-                                     array              $fields = [],
-                                     array              $groups = [],
-                                     string             $status = 'active',
-                                     ?DateTimeInterface $subscribedAt = null,
-                                     string             $ipAddress = null,
-                                     ?DateTimeInterface $opted_in_at = null,
-                                     ?string            $optinIp = null,
-                                     ?DateTimeInterface $unsubscribedAt = null): ?array
-    {
+    public function updateSubscriber(
+        string             $id,
+        array              $fields = [],
+        array              $groups = [],
+        string             $status = 'active',
+        ?DateTimeInterface $subscribedAt = null,
+        string             $ipAddress = null,
+        ?DateTimeInterface $opted_in_at = null,
+        ?string            $optinIp = null,
+        ?DateTimeInterface $unsubscribedAt = null
+    ): ?array {
         return $this->request('put', "subscribers/$id", get_defined_vars());
     }
 

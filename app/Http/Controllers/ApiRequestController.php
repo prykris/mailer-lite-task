@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiRequestController extends Controller
 {
-
     /**
      * Returns number of requests made in the last minute
      *

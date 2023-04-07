@@ -12,7 +12,6 @@ use Throwable;
  */
 class DeleteOldApiRequestRecords
 {
-
     public function __invoke(): void
     {
         try {

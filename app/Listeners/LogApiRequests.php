@@ -7,7 +7,6 @@ use Log;
 
 class LogApiRequests
 {
-
     /**
      * Handle the event.
      */

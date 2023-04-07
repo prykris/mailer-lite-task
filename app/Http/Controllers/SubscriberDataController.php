@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SubscriberDataController extends Controller
 {
-
     public function __construct(protected MailerLiteService $mailerLiteService)
     {
     }

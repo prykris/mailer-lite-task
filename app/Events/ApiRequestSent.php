@@ -12,17 +12,20 @@ use Illuminate\Queue\SerializesModels;
 
 class ApiRequestSent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public readonly string $method,
-                                public readonly string $endpoint,
-                                public readonly array  $parameters,
-                                public readonly array  $response,
-                                public readonly string $apiKey)
-    {
+    public function __construct(
+        public readonly string $method,
+        public readonly string $endpoint,
+        public readonly array  $parameters,
+        public readonly array  $response,
+        public readonly string $apiKey
+    ) {
     }
 
     /**

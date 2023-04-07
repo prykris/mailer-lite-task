@@ -27,7 +27,8 @@ use Illuminate\Support\Carbon;
  */
 class ApiKey extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
+    use HasUuids;
 
     protected $primaryKey = 'visitor_uuid';
 
