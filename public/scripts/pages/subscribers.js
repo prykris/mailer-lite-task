@@ -1,4 +1,7 @@
 let table;
+let alertContainer;
+
+const DISABLE_ALERTS = false;
 
 $(function () {
     table = initSubscriberTable();
@@ -6,7 +9,22 @@ $(function () {
     initSubscriberEditForm();
     initCountryPicker('select.countrypicker');
     initCountryPicker($('#subscriber-edit-modal select.countrypicker'));
+
+    alertContainer = $('#alert-container');
 });
+
+function alert(type, message) {
+    if (DISABLE_ALERTS) {
+        return;
+    }
+
+    alertContainer.append($(`
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `));
+}
 
 function initCountryPicker(selector, selectedValue) {
     let selectElement = $(selector);
@@ -43,6 +61,8 @@ function initSubscriberCreationForm() {
 
                 countrypicker.val('');
                 countrypicker.selectpicker('refresh');
+
+                alert('success', `Email address ${data.email} has been added to subscribers list`);
             },
             error: (response) => displayFormErrors(response.responseJSON.errors, this)
         });
@@ -119,7 +139,7 @@ function initSubscriberTable() {
 function readTableData(response) {
     updateRequestCounter();
 
-    return response.data.map(prepareRow);
+    return Object.values(response.data).map(prepareRow);
 }
 
 /**
@@ -148,6 +168,8 @@ function deleteSubscriber(id, table) {
             }
 
             table.ajax.reload(null, false);
+
+            alert('success', 'Subscriber removed from your email list')
         }
     });
     updateRequestCounter();

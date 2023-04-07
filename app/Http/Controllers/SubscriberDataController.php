@@ -33,6 +33,19 @@ class SubscriberDataController extends Controller
             ]);
         }
 
+        /**
+         * Just so you know, this is terrible idea! Your api and datatables are not compatible without horrible hacks
+         */
+        $search = $request->get('search');
+
+        if (!empty($search['value'])) {
+            $needle = strtolower(trim($search['value']));
+
+            $response['data'] = array_filter($response['data'], function (array $row) use ($needle) {
+                return str_contains($row['email'], $needle);
+            });
+        }
+
         return new JsonResponse([
             'draw' => $request->get('draw'),
             'recordsTotal' => $totalSubscribers,

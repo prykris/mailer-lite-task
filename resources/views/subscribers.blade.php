@@ -2,8 +2,11 @@
 
 @section('content')
 
+    <div class="row mt-5" id="alert-container">
+    </div>
+
     <div class="row">
-        <div class="card mt-5">
+        <div class="card mt-1">
             <div class="card-body">
                 <form action="/subscribers/create" id="create-subscriber-form">
                     <div class="input-group mb-3">
