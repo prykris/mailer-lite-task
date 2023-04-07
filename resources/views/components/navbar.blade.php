@@ -1,16 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="page navigation bar">
     <div class="container-fluid">
-        <div class="justify-content-start"
-             data-bs-toggle="tooltip"
-             title="{{$mailerLiteService->ready() ? 'Ok!' : 'Waiting for api key'}}">
-            <a href="{{ route('api-key') }}" class="{{ $mailerLiteService->ready() ? 'text-success' : 'text-secondary' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                     fill="currentColor" class="bi bi-key-fill"
-                     viewBox="0 0 16 16">
-                    <path
-                        d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                </svg>
-            </a>
+        <div class="d-flex justify-content-start">
+            <!-- Key button -->
+            <div class="">
+                <a href="{{ route('api-key') }}"
+                   class="{{ $mailerLiteService->ready() ? 'text-success' : 'text-secondary' }}"
+                   title="{{$mailerLiteService->ready() ? 'Ok!' : 'Waiting for api key'}}"
+                   data-bs-toggle="tooltip"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                         fill="currentColor" class="bi bi-key-fill"
+                         viewBox="0 0 16 16">
+                        <path
+                            d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Alert Switch -->
+            <div class="">
+                <a href="#" id="alert-switch" class="ms-4 text-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                         class="bi bi-bell-fill d-none" viewBox="0 0 16 16" id="alerts-on-icon" data-bs-toggle="tooltip"
+                         title="Alerts enabled">
+                        <path
+                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                         class="bi bi-bell-slash-fill d-none" viewBox="0 0 16 16" id="alerts-off-icon"
+                         data-bs-toggle="tooltip" title="Alerts disabled">
+                        <path
+                            d="M5.164 14H15c-1.5-1-2-5.902-2-7 0-.264-.02-.523-.06-.776L5.164 14zm6.288-10.617A4.988 4.988 0 0 0 8.995 2.1a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 7c0 .898-.335 4.342-1.278 6.113l9.73-9.73zM10 15a2 2 0 1 1-4 0h4zm-9.375.625a.53.53 0 0 0 .75.75l14.75-14.75a.53.53 0 0 0-.75-.75L.625 15.625z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navbar">
             <ul class="navbar-nav">

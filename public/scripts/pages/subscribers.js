@@ -1,8 +1,6 @@
 let table;
 let alertContainer;
 
-const DISABLE_ALERTS = false;
-
 $(function () {
     table = initSubscriberTable();
     initSubscriberCreationForm();
@@ -14,7 +12,8 @@ $(function () {
 });
 
 function alert(type, message) {
-    if (DISABLE_ALERTS) {
+    if (AppConfig.alertsEnabled === false) {
+        console.log(`alert-${type}: ${message}`);
         return;
     }
 
