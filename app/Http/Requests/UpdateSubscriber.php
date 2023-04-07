@@ -24,8 +24,8 @@ class UpdateSubscriber extends FormRequest
     {
         return [
             'id' => 'required',
-            'name' => 'required',
-            'country' => 'required'
+            'name' => 'required_without:country',
+            'country' => 'required_without:name'
         ];
     }
 }
