@@ -32,14 +32,17 @@ function initSubscriberCreationForm() {
 
         let data = extractFormData(this);
 
-        // Clear the inputs after we have read them
-        $('input[type="email"]', this).val('');
-
         $.ajax(this.action, {
             type: 'POST',
             data,
-            success: function () {
+            success: () => {
                 table.ajax.reload(null, false);
+                $('input[type="email"]', this).val('');
+
+                let countrypicker = $('select', this);
+
+                countrypicker.val('');
+                countrypicker.selectpicker('refresh');
             },
             error: (response) => displayFormErrors(response.responseJSON.errors, this)
         });
@@ -104,7 +107,7 @@ function initSubscriberTable() {
                 sortable: false
             }
         ],
-        pagingType: "simple",
+        pagingType: "full",
     });
 }
 
@@ -199,10 +202,7 @@ function displayFormErrors(errors, form) {
         for (let i = 0; i < inputErrors.length; i++) {
             let message = inputErrors[i];
 
-            console.log({message});
             let errorTextElement = $(`<small class="form-error-message form-text text-danger">${message}</small>`);
-
-            console.log(inputElement, inputElement.siblings('button'));
 
             if (inputElement.is('select')) {
                 errorTextElement.insertAfter(inputElement.siblings('button'));

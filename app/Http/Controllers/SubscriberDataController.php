@@ -36,7 +36,7 @@ class SubscriberDataController extends Controller
         return new JsonResponse([
             'draw' => $request->get('draw'),
             'recordsTotal' => $totalSubscribers,
-            'recordsFiltered' => 0,
+            'recordsFiltered' => $totalSubscribers,
             ...$response
         ]);
     }

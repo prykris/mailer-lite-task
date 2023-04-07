@@ -14,7 +14,7 @@
                     <input type="text" name="name" id="name-input" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <select name="country" class="countrypicker form-control" title="Country"></select>
+                    <select name="country" class="countrypicker form-control" title="Country" data-live-search="true"></select>
                 </div>
             </div>
             <div class="modal-footer">

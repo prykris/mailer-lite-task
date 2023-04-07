@@ -13,11 +13,13 @@
                                    aria-describedby="create-button">
                         </div>
                         <div class="col-3">
-                            <select class="countrypicker w-100 px-2" name="country" title="Country"></select>
+                            <select class="countrypicker w-100 px-2" name="country" title="Country"
+                                    data-live-search="true"></select>
                         </div>
 
                         <div class="col">
-                            <input type="submit" class="btn btn-success" type="button" id="create-button" value="Create">
+                            <input type="submit" class="btn btn-success" type="button" id="create-button"
+                                   value="Create">
                         </div>
                     </div>
                 </form>
