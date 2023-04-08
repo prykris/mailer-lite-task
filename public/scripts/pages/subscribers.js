@@ -1,6 +1,8 @@
 let table;
 let alertContainer;
 
+let currentCursor, previousCursor, nextCursor, firstCursor, lastCursor;
+
 $(function () {
     table = initSubscriberTable();
     initSubscriberCreationForm();
@@ -84,7 +86,12 @@ function initSubscriberTable() {
         autoWidth: true,
         ajax: {
             url: '/subscribers/data',
-            dataSrc: readTableData
+            dataSrc: readTableData,
+            data: function (data) {
+                data.cursor = currentCursor;
+
+                currentCursor = null;
+            }
         },
         columns: [
             {
@@ -126,7 +133,28 @@ function initSubscriberTable() {
                 sortable: false
             }
         ],
-        pagingType: "full",
+        pagingType: "simple",
+        drawCallback: function () {
+            const api = this.api();
+            const tableWrapper = $(this).closest('.dataTables_wrapper');
+            const nextButton = tableWrapper.find('.paginate_button.next');
+            const prevButton = tableWrapper.find('.paginate_button.previous');
+
+            nextButton.off('click').on('click', function () {
+                currentCursor = nextCursor;
+
+                api.ajax.reload();
+            });
+
+            prevButton.off('click').on('click', function () {
+                currentCursor = previousCursor; // Update the current cursor value
+
+                api.ajax.reload();
+            });
+
+            nextButton.toggleClass('disabled', !nextCursor);
+            prevButton.toggleClass('disabled', !previousCursor);
+        }
     });
 }
 
@@ -137,6 +165,9 @@ function initSubscriberTable() {
  */
 function readTableData(response) {
     updateRequestCounter();
+
+    nextCursor = response.meta.next_cursor;
+    previousCursor = response.meta.prev_cursor;
 
     return Object.values(response.data).map(prepareRow);
 }

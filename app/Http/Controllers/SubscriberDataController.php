@@ -18,7 +18,8 @@ class SubscriberDataController extends Controller
     public function index(Request $request): JsonResponse
     {
         $response = $this->mailerLiteService->getSubscribers(
-            limit: (int)$request->get('length')
+            limit: (int)$request->get('length'),
+            cursor: $request->get('cursor')
         );
 
         $totalSubscribers = $this->mailerLiteService->getTotalSubscribers()['total'] ?? 0;
@@ -48,7 +49,7 @@ class SubscriberDataController extends Controller
         return new JsonResponse([
             'draw' => $request->get('draw'),
             'recordsTotal' => $totalSubscribers,
-            'recordsFiltered' => $totalSubscribers,
+            'recordsFiltered' => count($response['data']),
             ...$response
         ]);
     }
