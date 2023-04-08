@@ -90,6 +90,9 @@ function initSubscriberTable() {
             data: function (data) {
                 data.cursor = currentCursor;
 
+                // currentCursor is only available when navigation buttons are pressed
+                // If we keep this value, it might be used again when different parameters have changed
+                // but not the currentCursor value making those changes obsolete
                 currentCursor = null;
             }
         },
