@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\SubscriberController;
 use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\ApiRequestController;
 use App\Http\Controllers\SubscriberController;
-use App\Http\Controllers\SubscriberDataController;
 use App\Http\Middleware\EnsureApiKeyIsSet;
 use App\Http\Middleware\RestoreApiKey;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +34,7 @@ Route::middleware([RestoreApiKey::class])->group(function () {
             Route::get('/subscribers', 'index')->name('subscribers');
         });
 
-        Route::controller(SubscriberDataController::class)->group(function () {
+        Route::controller(SubscriberController::class)->group(function () {
             Route::get('/subscribers/data', 'index')->name('subscribers.data');
             Route::delete('/subscribers/delete', 'delete')->name('subscribers.delete');
             Route::post('/subscribers/create', 'create')->name('subscribers.create');

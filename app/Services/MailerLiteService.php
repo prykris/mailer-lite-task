@@ -134,12 +134,9 @@ class MailerLiteService
         })->toArray();
     }
 
-    /**
-     * @return array [ "total" => int ]
-     */
-    public function getTotalSubscribers(): array
+    public function getTotalSubscribers(): int
     {
-        return $this->request('get', 'subscribers', ['limit' => 0]);
+        return (int)$this->request('get', 'subscribers', ['limit' => 0])['total'] ?? 0;
     }
 
     /**
@@ -175,7 +172,8 @@ class MailerLiteService
         ?DateTimeInterface $opted_in_at = null,
         ?string            $optinIp = null,
         ?DateTimeInterface $unsubscribedAt = null
-    ): ?array {
+    ): ?array
+    {
         return $this->request('post', 'subscribers', get_defined_vars());
     }
 
@@ -200,7 +198,8 @@ class MailerLiteService
         ?DateTimeInterface $opted_in_at = null,
         ?string            $optinIp = null,
         ?DateTimeInterface $unsubscribedAt = null
-    ): ?array {
+    ): ?array
+    {
         return $this->request('put', "subscribers/$id", get_defined_vars());
     }
 

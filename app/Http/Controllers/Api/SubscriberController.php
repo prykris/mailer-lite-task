@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateSubscriber;
 use App\Http\Requests\DeleteSubscriber;
 use App\Http\Requests\UpdateSubscriber;
@@ -9,7 +10,7 @@ use App\Services\MailerLiteService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class SubscriberDataController extends Controller
+class SubscriberController extends Controller
 {
     public function __construct(protected MailerLiteService $mailerLiteService)
     {
@@ -22,7 +23,7 @@ class SubscriberDataController extends Controller
             cursor: $request->get('cursor')
         );
 
-        $totalSubscribers = $this->mailerLiteService->getTotalSubscribers()['total'] ?? 0;
+        $totalSubscribers = $this->mailerLiteService->getTotalSubscribers();
 
         if (null === $response) {
             return new JsonResponse([
@@ -30,7 +31,9 @@ class SubscriberDataController extends Controller
                 'error' => $this->mailerLiteService->ready()
                     ? 'Error occurred while sending api request, check logs'
                     : 'The API key is missing'
-            ]);
+            ],
+                status: 500
+            );
         }
 
         /**
