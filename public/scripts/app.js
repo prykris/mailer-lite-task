@@ -41,8 +41,6 @@ function readAppConfig() {
     for (const setting in AppConfig) {
         let savedValue = window.localStorage.getItem(setting);
 
-        console.log({savedValue, defaultValue: AppConfig[setting]});
-
         if (savedValue === null) {
             continue;
         }
@@ -53,7 +51,6 @@ function readAppConfig() {
             AppConfig[setting] = savedValue;
         }
 
-        console.log({finalValue: AppConfig[setting]})
     }
 
     return AppConfig;

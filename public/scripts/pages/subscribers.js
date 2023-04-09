@@ -15,7 +15,6 @@ $(function () {
 
 function alert(type, message) {
     if (AppConfig.alertsEnabled === false) {
-        console.log(`alert-${type}: ${message}`);
         return;
     }
 
@@ -144,15 +143,21 @@ function initSubscriberTable() {
             const prevButton = tableWrapper.find('.paginate_button.previous');
 
             nextButton.off('click').on('click', function () {
+                if ($(this).hasClass('disabled')) return;
+
                 currentCursor = nextCursor;
 
                 api.ajax.reload();
             });
 
             prevButton.off('click').on('click', function () {
+                if ($(this).hasClass('disabled')) return;
+
                 currentCursor = previousCursor; // Update the current cursor value
 
-                api.ajax.reload();
+                if (currentCursor) {
+                    api.ajax.reload();
+                }
             });
 
             nextButton.toggleClass('disabled', !nextCursor);
@@ -250,8 +255,6 @@ function displayFormErrors(errors, form) {
     for (const inputName in errors) {
         let inputErrors = errors[inputName];
         let inputElement = $(`input[name="${inputName}"], select[name=${inputName}]`, form);
-
-        console.log(inputErrors);
 
         // Display error messages
         for (let i = 0; i < inputErrors.length; i++) {
